@@ -8,7 +8,7 @@ function SearchLocation() {
 
 
 //create the state for weather, and update the 
-const { weather} = useContext(Context);
+const { weather, setWeather} = useContext(Context);
 
 
     const searchWeather = async (e) => {
@@ -20,11 +20,12 @@ const { weather} = useContext(Context);
         try {
             const res = await fetch(url);
             const data = await res.json();
-            setWeather(data.results);
+            setWeather(data);
         }catch(err) {
             console.log(err);
         }
     }
+
     
     return (
         <>
@@ -33,11 +34,9 @@ const { weather} = useContext(Context);
                 <button className="button" type="submit">Search</button>
             </form>
             <div className="card-list">
-                {weather.filter(dailyWeather => dailyWeather).map(weather => { 
+                {weather.filter(dailyWeather => dailyWeather).map(city => { 
                 return (
-                <div className="card">
-                  <button className="city">{weather.title}</button>
-                </div>
+                   <button className="city">{city.title}</button> 
                 )})}
             </div>
         </>

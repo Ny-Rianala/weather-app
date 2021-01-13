@@ -5,11 +5,11 @@ function ContextProvider ({children}) {
     const [weather, setWeather] = useState([]);
 
     const getWeather = async() => {
-        const URL = "https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=london"
+        const URL = "https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2487956/"
         const res = await fetch(URL);
         const data = await res.json();
-        setWeather(data);
-        console.log(data);
+        setWeather(data.consolidated_weather);
+        console.log(data.consolidated_weather);
     }
 
     useEffect(() => {
@@ -17,7 +17,7 @@ function ContextProvider ({children}) {
     }, [])
 
     return (
-        <Context.Provider value={{getWeather, weather}}>
+        <Context.Provider value={{getWeather, weather, setWeather}}>
             {children}
         </Context.Provider>
     )
