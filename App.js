@@ -1,10 +1,30 @@
 import React from "react";
-import Weather from "./Weather";
+import { Switch, Route} from 'react-router-dom';
+
+import CityButton from "./CityButton";
+import TempSideBar from "./TempSideBar";
+import TodaysHighlight from "./TodaysHighlight";
+import  DailyWeather from "./DailyWeather";
+
 
 function App() {
     return (
         <div>
-            <Weather />
+            <div>
+              <TempSideBar /> 
+            </div>
+            <div>
+              <DailyWeather />
+              <TodaysHighlight />
+            </div>
+            <Switch>
+                <Route exact path="/CityButton">
+					<CityButton />
+				</Route>
+                <Route path="/TodaysHighlight">
+					<TodaysHighlight />
+				</Route>
+            </Switch>
         </div>
     )
 }

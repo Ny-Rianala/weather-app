@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "./Context";
+
 
 
 function SearchLocation() {
@@ -26,7 +28,6 @@ const { weather, setWeather} = useContext(Context);
         }
     }
 
-    
     return (
         <>
             <form className="form" onSubmit={searchWeather}>
@@ -34,9 +35,9 @@ const { weather, setWeather} = useContext(Context);
                 <button className="button" type="submit">Search</button>
             </form>
             <div className="card-list">
-                {weather.filter(dailyWeather => dailyWeather).map(city => { 
+                {weather.filter(dailyWeather => dailyWeather).map(city =>   { 
                 return (
-                   <button className="city">{city.title}</button> 
+                   <button className="city"><Link to="/CityButton">{city.title}</Link></button> 
                 )})}
             </div>
         </>

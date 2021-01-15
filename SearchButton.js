@@ -12,7 +12,7 @@ function SearchButton() {
     return(
         <div>
             <button className="search" onClick={handleClick}>Search for places</button>   
-            {isOpen &&  <div>
+            {isOpen && <div>
                 <button className="remove" onClick={handleClick}>X</button>
                 <SearchLocation />
                 </div>

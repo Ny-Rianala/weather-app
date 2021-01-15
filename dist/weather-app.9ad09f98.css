@@ -5,7 +5,6 @@ html {
 
 * {
     box-sizing: border-box;
-    /* color: white; */
 }
 
 
@@ -57,7 +56,10 @@ div:nth-child(1) {
 
 .city {
     font-size: 1.6rem;
-    padding: 1rem 18rem;
+    padding-top: 23px;
+    padding-left: 12px;
+    padding-bottom: 22px;
+    padding-right: 293px;
     line-height: 2.8rem;
     color: #ffffff;
     border: 2px solid white;
@@ -87,14 +89,14 @@ div:nth-child(1) {
 
 
 .search {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    padding-top: 11px;
+    padding-left: 18px;
+    padding-bottom: 10px;
+    padding-right: 18px;
     background-color: #718096;
     color: white;
     border: none;
-    margin: 2rem;
+    margin: 11px;
 }
 
 .remove {
@@ -126,12 +128,32 @@ div:nth-child(1) {
     padding-bottom: 68px;
     margin-bottom: 2rem;
     background-color: #1e213a;
+    border: none;
 }
 
  a {
     list-style: none;
     text-decoration: none;
     color: white;
+}
+
+.temp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.highlightDate {
+    width: 35%;
+    height: 50%;
+    margin-left: 1rem;
+    padding-top: 47px;
+    padding-left: 32px;
+    padding-right: 31.56px;
+    padding-bottom: 68px;
+    margin-bottom: 2rem;
+    background-color: #1e213a;
+    border: none;
 }
 
 /*# sourceMappingURL=/weather-app.9ad09f98.css.map */
