@@ -34045,28 +34045,17 @@ function TempSideBar() {
     weather
   } = (0, _react.useContext)(_Context.Context);
   const arr = weather[0];
-  console.log(arr); // function WeatherToday() {
-  //     return (
-  //         <div>
-  //             <p>{arr.weather_state_name}</p>
-  //         </div>
-  //     )}
-  // console.log(WeatherToday);
-
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_SearchButton.default, null));
-} // const predictedWeather = ((arr, index) => {
-//     <div>
-//         <Link to="/TodaysHighlight" key={index.id}>
-//             <div>{arr.weather_state_name}</div>
-//             <img src={`https://www.metaweather.com//static/img/weather/${arr.weather_state_abbr}.svg`}/>
-//             <div>Today,{arr.applicable_date}</div>
-//             <div>{arr.the_temp}</div>
-//             <div>{arr.title}</div>
-//         </Link>
-//     </div>
-// })
-// console.log(predictedWeather);
-
+  console.log(arr);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "sideBar"
+  }, /*#__PURE__*/_react.default.createElement(_SearchButton.default, null), /*#__PURE__*/_react.default.createElement("div", {
+    className: "weatherToday"
+  }, weather.slice(0, 1).map(data => {
+    return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+      src: `https://www.metaweather.com//static/img/weather/${data.weather_state_abbr}.svg`
+    }), /*#__PURE__*/_react.default.createElement("h1", null, Math.floor(data.the_temp), " \xBAC"), /*#__PURE__*/_react.default.createElement("h2", null, data.weather_state_name), /*#__PURE__*/_react.default.createElement("div", null, "Today, ", data.applicable_date), /*#__PURE__*/_react.default.createElement("div", null, data.title));
+  })));
+}
 
 var _default = TempSideBar;
 exports.default = _default;
@@ -34135,7 +34124,9 @@ function DailyWeather() {
   } = (0, _react.useContext)(_Context.Context);
   console.log(weather);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, weather.slice(1).map(data => {
-    return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "dailyWeather"
+    }, /*#__PURE__*/_react.default.createElement("button", {
       className: "cardWeather"
     }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: "/TodaysHighlight",
@@ -34227,7 +34218,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61285" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51362" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

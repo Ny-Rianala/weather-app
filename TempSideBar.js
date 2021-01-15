@@ -11,42 +11,25 @@ function TempSideBar() {
     const arr = weather[0];
     console.log(arr);
 
-    // function WeatherToday() {
-    //     return (
-    //         <div>
-    //             <p>{arr.weather_state_name}</p>
-    //         </div>
-    //     )}
-        
-    // console.log(WeatherToday);
-
-    
     return (
-        <div>
+        <div className="sideBar">
                 <SearchButton />
-                {/* <WeatherToday /> */}
-                {/* <div>{predictedWeather}</div>
-                 */}
-                {/* <div>{arr.the_temp}</div> */}
+                <div className="weatherToday">
+                    {weather.slice(0, 1).map((data) => {
+                        return (
+                            <div>
+                                <img src={`https://www.metaweather.com//static/img/weather/${data.weather_state_abbr}.svg`}/>
+                                <h1>{Math.floor(data.the_temp)} ºC</h1>
+                                <h2>{data.weather_state_name}</h2>
+                                <div>Today, {data.applicable_date}</div>
+                                <div>{data.title}</div>
+                            </div>
+                        )
+                    })} 
+                </div>
             </div>
         )
     }
     
     
-    
-    // const predictedWeather = ((arr, index) => {
-    //     <div>
-    //         <Link to="/TodaysHighlight" key={index.id}>
-    //             <div>{arr.weather_state_name}</div>
-    //             <img src={`https://www.metaweather.com//static/img/weather/${arr.weather_state_abbr}.svg`}/>
-    //             <div>Today,{arr.applicable_date}</div>
-    //             <div>{arr.the_temp}</div>
-    //             <div>{arr.title}</div>
-    //         </Link>
-    //     </div>
-    // })
-
-   
-    // console.log(predictedWeather);
-
 export default TempSideBar

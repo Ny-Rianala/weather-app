@@ -18,7 +18,7 @@ function DailyWeather() {
                 <div>
                     {weather.slice(1).map((data)=> {
                         return (
-                        <div>
+                        <div className="dailyWeather">
                             <button className="cardWeather">
                                 <Link to="/TodaysHighlight" key={data.id}>
                                     <div>{data.applicable_date}</div>

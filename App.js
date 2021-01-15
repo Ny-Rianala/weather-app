@@ -19,11 +19,11 @@ function App() {
             </div>
             <Switch>
                 <Route exact path="/CityButton">
-					<CityButton />
-				</Route>
+					        <CityButton />
+				        </Route>
                 <Route path="/TodaysHighlight">
-					<TodaysHighlight />
-				</Route>
+					        <TodaysHighlight />
+				        </Route>
             </Switch>
         </div>
     )
