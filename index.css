@@ -46,7 +46,6 @@ div:nth-child(1) {
 
 .input {
     font-size: 1.6rem;
-    padding: 1rem 8rem;
     line-height: 2.8rem;
     color: #ffffff;
     border: 2px solid white;
@@ -180,4 +179,26 @@ img {
 .dailyWeather {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+}
+
+.dayOfWeek, .dateToday {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dayWeek {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+} 
+
+@media(min-width: 1000px) {
+    .dayWeek {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+    }
 }
