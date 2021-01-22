@@ -145,9 +145,8 @@ div:nth-child(1) {
 }
 
 .highlightDate {
-    width: 35%;
-    height: 50%;
-    margin-left: 1rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
     padding-top: 47px;
     padding-left: 32px;
     padding-right: 31.56px;
@@ -157,9 +156,6 @@ div:nth-child(1) {
     border: none;
 }
 
-img {
-    max-width: 20%;
-}
 
 .sideBar {
     background-color: #1e213a;
@@ -194,11 +190,26 @@ img {
 } 
 
 @media(min-width: 1000px) {
+    .container {
+        display: grid;
+        grid-template-columns: 30% 70%;
+        background-color: black;
+    }
+    .sideBar {
+        background-color: black;
+    }
+    .weatherToday {
+        background-color: #1e213a;
+    }
     .dayWeek {
         display: flex;
         flex-direction: row;
-        position: absolute;
-        top: 20%;
-        left: 50%;
+        margin-left: 20px;
+        margin-top: 95px;
+    }
+    .hightlightWeather {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
+

@@ -11,7 +11,7 @@ function TodaysHighlight() {
             <h1>Today's Highlight</h1>
             {weather.slice(0, 1).map((data) => {
                 return (
-                    <div key={data.id}>
+                    <div key={data.id} className="hightlightWeather">
                         <div className="highlightDate">
                             <h2>Wind Status</h2>
                             <div>{Math.floor(data.wind_direction)}mph</div>
@@ -20,7 +20,7 @@ function TodaysHighlight() {
                         <div className="highlightDate">
                             <h2>Humidity</h2>
                             <div>{data.humidity}%</div>
-                            <progress  value="$`{data.humidity} %`"></progress>
+                            <progress max="100" value={data.humidity}></progress>
                         </div>
                         <div className="highlightDate">
                             <h2>Visibility</h2>

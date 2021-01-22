@@ -10,13 +10,15 @@ import  DailyWeather from "./DailyWeather";
 function App() {
     return (
         <div>
-            <div>
+          <div className="container">
+            <div className="sidebar">
               <TempSideBar /> 
             </div>
             <div>
               <DailyWeather />
               <TodaysHighlight />
             </div>
+          </div>
             <Switch>
                 <Route exact path="/CityButton">
 					        <CityButton />

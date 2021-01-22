@@ -52254,13 +52254,15 @@ function TodaysHighlight() {
   } = (0, _react.useContext)(_Context.Context);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Today's Highlight"), weather.slice(0, 1).map(data => {
     return /*#__PURE__*/_react.default.createElement("div", {
-      key: data.id
+      key: data.id,
+      className: "hightlightWeather"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "highlightDate"
     }, /*#__PURE__*/_react.default.createElement("h2", null, "Wind Status"), /*#__PURE__*/_react.default.createElement("div", null, Math.floor(data.wind_direction), "mph"), /*#__PURE__*/_react.default.createElement("div", null, data.wind_direction_compass)), /*#__PURE__*/_react.default.createElement("div", {
       className: "highlightDate"
     }, /*#__PURE__*/_react.default.createElement("h2", null, "Humidity"), /*#__PURE__*/_react.default.createElement("div", null, data.humidity, "%"), /*#__PURE__*/_react.default.createElement("progress", {
-      value: "$`{data.humidity} %`"
+      max: "100",
+      value: data.humidity
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "highlightDate"
     }, /*#__PURE__*/_react.default.createElement("h2", null, "Visibility"), /*#__PURE__*/_react.default.createElement("div", null, Math.floor(data.visibility), " miles")), /*#__PURE__*/_react.default.createElement("div", {
@@ -52343,7 +52345,11 @@ var _DailyWeather = _interopRequireDefault(require("./DailyWeather"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_TempSideBar.default, null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_DailyWeather.default, null), /*#__PURE__*/_react.default.createElement(_TodaysHighlight.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "sidebar"
+  }, /*#__PURE__*/_react.default.createElement(_TempSideBar.default, null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_DailyWeather.default, null), /*#__PURE__*/_react.default.createElement(_TodaysHighlight.default, null))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/CityButton"
   }, /*#__PURE__*/_react.default.createElement(_CityButton.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
@@ -52397,7 +52403,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59041" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53882" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
