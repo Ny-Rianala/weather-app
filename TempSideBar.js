@@ -7,20 +7,18 @@ import { format } from "date-fns";
 
 function TempSideBar() {
 
-    const { weather} = useContext(Context);
-    
-    const arr = weather[0];
-    console.log(arr);
-
+    const { locationArr, weather, woeid } = useContext(Context);
+    console.log(locationArr);
+  
     return (
         <div className="sideBar">
                 <SearchButton />
                 <div className="weatherToday">
-                    {weather.slice(0, 1).map((data) => {
+                    {weather.slice(1, 2).map((data, index) => {
                         return (
-                            <div key={data.id}>
+                            <div key={index}>
                                 <img src={`https://www.metaweather.com//static/img/weather/${data.weather_state_abbr}.svg`}/>
-                                <h1>{Math.floor(data.the_temp)} ºC</h1>
+                                <h1>{data.title}</h1>
                                 <h2>{data.weather_state_name}</h2>
                                 {/* <div>{
                                     <div className="dateToday">Today, 
@@ -30,8 +28,8 @@ function TempSideBar() {
                                     </div>
                                     }
                                 </div> */}
-                                <div>Today, {data.applicable_date}</div>
-                                <div>{data.title}</div>
+                                {/* <div>Today, {data.applicable_date}</div> */}
+                                {/* <div>{data.title}</div> */}
                             </div>
                         )
                     })} 

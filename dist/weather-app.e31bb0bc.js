@@ -33895,23 +33895,41 @@ function ContextProvider({
   children
 }) {
   const [weather, setWeather] = (0, _react.useState)([]);
+  const [location, setLocation] = (0, _react.useState)('london');
+  const [locationArr, setLocationArr] = (0, _react.useState)([]);
+  const [woeid, setWoeid] = (0, _react.useState)(44418);
+  const url = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${location}`;
 
-  const getWeather = async () => {
-    const URL = "https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2487956/";
+  const getLocation = async () => {
+    // const URL = "https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2487956/"
+    const res = await fetch(url);
+    const data = await res.json();
+    setLocationArr(data);
+    console.log(data);
+  };
+
+  const getWether = async () => {
+    const URL = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`;
     const res = await fetch(URL);
     const data = await res.json();
     setWeather(data.consolidated_weather);
-    console.log(data.consolidated_weather);
+    console.log(data);
   };
 
   (0, _react.useEffect)(() => {
-    getWeather();
-  }, []);
+    getLocation();
+  }, [location]);
+  (0, _react.useEffect)(() => {
+    getWether();
+  }, [woeid]);
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
-      getWeather,
+      getLocation,
       weather,
-      setWeather
+      setWeather,
+      locationArr,
+      setLocation,
+      setLocationArr
     }
   }, children);
 }
@@ -33934,44 +33952,35 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function SearchLocation() {
-  const [query, setQuery] = (0, _react.useState)(""); //create the state for weather, and update the 
-
+  // const [query, setQuery] = useState("");
+  //create the state for weather, and update the 
   const {
+    locationArr,
     weather,
-    setWeather
+    setLocationArr,
+    setLocation
   } = (0, _react.useContext)(_Context.Context);
-
-  const searchWeather = async e => {
-    e.preventDefault();
-    console.log("Submitted");
-    const url = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${query}`;
-
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      setWeather(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("form", {
     className: "form",
-    onSubmit: searchWeather
+    onSubmit: e => {
+      e.preventDefault();
+      setLocation(e.target.query.value);
+      console.log(location);
+    }
   }, /*#__PURE__*/_react.default.createElement("input", {
     className: "input",
     type: "text",
     name: "query",
     placeholder: "london",
-    value: query,
-    onChange: e => setQuery(e.target.value)
+    onChange: () => {}
   }), /*#__PURE__*/_react.default.createElement("button", {
     className: "button",
     type: "submit"
   }, "Search")), /*#__PURE__*/_react.default.createElement("div", {
     className: "card-list"
-  }, weather.filter(dailyWeather => dailyWeather).map(city => {
+  }, locationArr.map((city, index) => {
     return /*#__PURE__*/_react.default.createElement("button", {
+      key: index,
       className: "city"
     }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: "/CityButton"
@@ -52213,20 +52222,21 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function TempSideBar() {
   const {
-    weather
+    locationArr,
+    weather,
+    woeid
   } = (0, _react.useContext)(_Context.Context);
-  const arr = weather[0];
-  console.log(arr);
+  console.log(locationArr);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "sideBar"
   }, /*#__PURE__*/_react.default.createElement(_SearchButton.default, null), /*#__PURE__*/_react.default.createElement("div", {
     className: "weatherToday"
-  }, weather.slice(0, 1).map(data => {
+  }, weather.slice(1, 2).map((data, index) => {
     return /*#__PURE__*/_react.default.createElement("div", {
-      key: data.id
+      key: index
     }, /*#__PURE__*/_react.default.createElement("img", {
       src: `https://www.metaweather.com//static/img/weather/${data.weather_state_abbr}.svg`
-    }), /*#__PURE__*/_react.default.createElement("h1", null, Math.floor(data.the_temp), " \xBAC"), /*#__PURE__*/_react.default.createElement("h2", null, data.weather_state_name), /*#__PURE__*/_react.default.createElement("div", null, "Today, ", data.applicable_date), /*#__PURE__*/_react.default.createElement("div", null, data.title));
+    }), /*#__PURE__*/_react.default.createElement("h1", null, data.title), /*#__PURE__*/_react.default.createElement("h2", null, data.weather_state_name));
   })));
 }
 
@@ -52312,7 +52322,9 @@ function DailyWeather() {
       className: "cardWeather"
     }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: "/TodaysHighlight"
-    }, /*#__PURE__*/_react.default.createElement("div", null, data.applicable_date), /*#__PURE__*/_react.default.createElement("div", null, data.title), /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+      className: "dayOfWeek"
+    }, /*#__PURE__*/_react.default.createElement("span", null, (0, _dateFns.format)(new Date(data.applicable_date), 'eee')), /*#__PURE__*/_react.default.createElement("span", null, (0, _dateFns.format)(new Date(data.applicable_date), 'd')), /*#__PURE__*/_react.default.createElement("span", null, (0, _dateFns.format)(new Date(data.applicable_date), 'MMM')))), /*#__PURE__*/_react.default.createElement("div", null, data.title), /*#__PURE__*/_react.default.createElement("img", {
       src: `https://www.metaweather.com//static/img/weather/${data.weather_state_abbr}.svg`
     }), /*#__PURE__*/_react.default.createElement("div", {
       className: "temp"
@@ -52403,7 +52415,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53882" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60242" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

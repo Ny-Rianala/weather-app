@@ -20,15 +20,14 @@ function DailyWeather() {
                         <div className="dailyWeather" key={data.id}>
                             <button className="cardWeather">
                                 <Link to="/TodaysHighlight">
-                                {/* <div>{
+                                <div>{
                                     <div className="dayOfWeek">
                                       <span>{format(new Date(data.applicable_date), 'eee')}</span>
                                       <span>{format(new Date(data.applicable_date), 'd')}</span>
                                       <span>{format(new Date(data.applicable_date), 'MMM')}</span>
                                     </div>
                                     }
-                                </div> */}
-                                    <div>{data.applicable_date}</div>
+                                </div>
                                     <div>{data.title}</div>
                                     <img src={`https://www.metaweather.com//static/img/weather/${data.weather_state_abbr}.svg`}/>
                                     <div className="temp">

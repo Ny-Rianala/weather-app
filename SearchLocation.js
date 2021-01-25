@@ -5,39 +5,33 @@ import { Context } from "./Context";
 
 
 function SearchLocation() {
-    const [query, setQuery] = useState("");
+    // const [query, setQuery] = useState("");
     
 
 
 //create the state for weather, and update the 
-const { weather, setWeather} = useContext(Context);
-
-
-    const searchWeather = async (e) => {
-        e.preventDefault();
-        console.log("Submitted");
-
-        const url = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${query}`;
-
-        try {
-            const res = await fetch(url);
-            const data = await res.json();
-            setWeather(data);
-        }catch(err) {
-            console.log(err);
-        }
-    }
-
+const { locationArr, weather, setLocationArr, setLocation } = useContext(Context);
     return (
         <>
-            <form className="form" onSubmit={searchWeather}>
-                <input className="input" type="text" name="query" placeholder="london" value={query} onChange={(e) => setQuery(e.target.value)}/>
+            <form className="form" onSubmit={(e) => {
+                e.preventDefault();
+                setLocation(e.target.query.value)
+                console.log(location);
+            }}>
+                <input 
+                    className="input" 
+                    type="text" 
+                    name="query" 
+                    placeholder="london" 
+                    onChange={() => {}} />
                 <button className="button" type="submit">Search</button>
             </form>
             <div className="card-list">
-                {weather.filter(dailyWeather => dailyWeather).map(city =>   { 
+                {locationArr.map((city, index) =>   { 
                 return (
-                   <button className="city"><Link to="/CityButton">{city.title}</Link></button> 
+                   <button key={index} className="city">
+                       <Link to="/CityButton">{city.title}</Link>
+                    </button> 
                 )})}
             </div>
         </>
